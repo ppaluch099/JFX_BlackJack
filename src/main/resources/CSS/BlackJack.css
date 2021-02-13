@@ -1,0 +1,30 @@
+.root {
+    -fx-background-image: url("/IMG/bg.jpg");
+}
+* {
+    -fx-text-fill: white;
+}
+FlowPane {
+    -fx-border-color: white;
+    -fx-alignment: center center;
+}
+.button {
+    -fx-text-fill: black;
+}
+FlowPane .label {
+    -fx-font-family: Consolas;
+    -fx-font-size: 100px;
+    -fx-text-fill: white;
+    -fx-padding: 20px;
+}
+
+/*Dialog*/
+.dialog-pane {
+    -fx-background-color: black;
+    -fx-alignment: center;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+}
