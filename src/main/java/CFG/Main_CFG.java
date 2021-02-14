@@ -16,7 +16,7 @@ public class Main_CFG implements Initializable {
 
     @FXML public FlowPane dealer_pane, player_pane;
     @FXML public Button drawButton;
-    String[] deck = {"2","3","4","5","6","7","8","9", "10","J","Q","K","A"};
+    String[] deck = {"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
     int[] values = {2,3,4,5,6,7,8,9,10,10,10,10};
     public int dealer_score, player_score, card, dealerCounter;
     ArrayList<String> dealerDeck = new ArrayList<>();
@@ -26,9 +26,11 @@ public class Main_CFG implements Initializable {
     List<Image> hearts = new ArrayList<>();
     List<Image> diamonds = new ArrayList<>();
     List<Image> chosen = new ArrayList<>();
+    List<Image> used;
     Random rnd = new Random();
     ImageView imgView = new ImageView();
     public void init() {
+        used = new ArrayList<>();
         imgView.setPreserveRatio(true);
         imgView.setFitHeight(150);
         drawButton.setDisable(false);
@@ -71,8 +73,13 @@ public class Main_CFG implements Initializable {
         }
         playerDeck.add(deck[card]);
         chosen = chooseColour();
+        while(used.contains(chosen.get(card)))
+        {
+         chosen = chooseColour();
+        }
         imgView = new ImageView(); imgView.setFitHeight(150); imgView.setPreserveRatio(true);
         imgView.setImage(chosen.get(card));
+        used.add(chosen.get(card));
         player_pane.getChildren().add(imgView);
         if (player_score > 21) {
             end();
@@ -164,7 +171,11 @@ public class Main_CFG implements Initializable {
         imgView = new ImageView(); imgView.setFitHeight(150); imgView.setPreserveRatio(true);
         if (dealerCounter < 2) {
             chosen = chooseColour();
+            while (used.contains(chosen.get(card))) {
+                chosen = chooseColour();
+            }
             imgView.setImage(chosen.get(card));
+            used.add(chosen.get(card));
             dealer_pane.getChildren().add(imgView);
             dealerCounter++;
         }
@@ -185,6 +196,10 @@ public class Main_CFG implements Initializable {
         try {
             for (int i = 2; i < dealerDeck.size(); i++) {
                 imgView = new ImageView();imgView.setFitHeight(150);imgView.setPreserveRatio(true);
+                chosen = chooseColour();
+                while (used.contains(chosen.get(Arrays.asList(deck).indexOf(dealerDeck.get(i))))) {
+                    chosen = chooseColour();
+                }
                 imgView.setImage(chosen.get(Arrays.asList(deck).indexOf(dealerDeck.get(i))));
                 dealer_pane.getChildren().add(imgView);
             }
