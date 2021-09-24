@@ -1,3 +1,3 @@
 # JFX_BlackJack
 
-Basic JavaFX BlackJack created out of boredom.
+A simple JavaFX BlackJack created out of boredom.
